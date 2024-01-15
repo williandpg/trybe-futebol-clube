@@ -1,8 +1,9 @@
-import { QueryInterface, DataTypes } from 'sequelize';
+import { Model, QueryInterface, DataTypes } from 'sequelize';
+import ITeams from '../../Interfaces/ITeams';
 
 export default {
     up: async (queryInterface: QueryInterface): Promise<void> => {
-        await queryInterface.createTable('teams', {
+        await queryInterface.createTable<Model<ITeams>>('teams', {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,

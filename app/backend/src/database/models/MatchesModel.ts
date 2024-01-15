@@ -1,18 +1,24 @@
-import { Model, DataTypes } from 'sequelize';
+import {
+  Model,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+} from 'sequelize';
 import db from '.';
 
-export default class Matches extends Model {
-  public id!: number;
+export default class Matches extends
+  Model<InferAttributes<Matches>, InferCreationAttributes<Matches>> {
+  declare id: number;
 
-  public homeTeamId!: string;
+  declare homeTeamId: string;
 
-  public awayTeamId!: string;
+  declare homeTeamGoals: number;
 
-  public homeTeamGoals!: number;
+  declare awayTeamId: string;
 
-  public awayTeamGoals!: number;
+  declare awayTeamGoals: number;
 
-  public inProgress!: boolean;
+  declare inProgress: boolean;
 }
 
 Matches.init({
@@ -27,15 +33,15 @@ Matches.init({
     allowNull: false,
     field: 'home_team_id',
   },
-  awayTeamId: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    field: 'away_team_id',
-  },
   homeTeamGoals: {
     type: DataTypes.INTEGER,
     allowNull: false,
     field: 'home_team_goals',
+  },
+  awayTeamId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: 'away_team_id',
   },
   awayTeamGoals: {
     type: DataTypes.INTEGER,

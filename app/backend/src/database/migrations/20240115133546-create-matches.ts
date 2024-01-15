@@ -1,34 +1,36 @@
-import { QueryInterface, DataTypes } from "sequelize";
+import { Model, QueryInterface, DataTypes } from "sequelize";
+import IMatches from '../../Interfaces/IMatches';
 
 export default {
   up: async (queryInterface: QueryInterface): Promise<void> => {
-    await queryInterface.createTable("matches", {
+    await queryInterface.createTable<Model<IMatches>>("matches", {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      home_team_id: {
+      homeTeamId: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      away_team_id: {
+      homeTeamGoals: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      awayTeamId: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      home_team_goals: {
+      awayTeamGoals: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      away_team_goals: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      in_progress: {
+      inProgress: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
+        field: 'in_progress',
       },
     });
   },

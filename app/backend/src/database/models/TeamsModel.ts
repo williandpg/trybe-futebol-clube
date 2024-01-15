@@ -1,10 +1,15 @@
-import { Model, DataTypes } from 'sequelize';
+import {
+  Model,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+} from 'sequelize';
 import db from '.';
 
-export default class Team extends Model {
-  public id!: number;
+export default class Team extends Model<InferAttributes<Team>, InferCreationAttributes<Team>> {
+  declare id: number;
 
-  public teamName!: string;
+  declare teamName: string;
 }
 
 Team.init({

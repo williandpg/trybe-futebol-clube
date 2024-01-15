@@ -1,16 +1,20 @@
-import { Model, DataTypes } from 'sequelize';
+import {
+  Model,
+  DataTypes,
+  InferAttributes,
+} from 'sequelize';
 import db from '.';
 
-export default class User extends Model {
-  public id!: number;
+export default class User extends Model<InferAttributes<User>, InferAttributes<User>> {
+  declare id: number;
 
-  public username!: string;
+  declare username: string;
 
-  public role!: string;
+  declare role: string;
 
-  public email!: string;
+  declare email: string;
 
-  public password!: string;
+  declare password: string;
 }
 
 User.init({

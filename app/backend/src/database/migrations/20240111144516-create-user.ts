@@ -1,8 +1,9 @@
-import { QueryInterface, DataTypes } from 'sequelize';
+import { Model, QueryInterface, DataTypes } from 'sequelize';
+import IUser from '../../Interfaces/IUser';
 
 export default {
   up: async (queryInterface: QueryInterface): Promise<void> => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable<Model<IUser>>('users', {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
