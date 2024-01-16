@@ -5,16 +5,17 @@ import {
 } from 'sequelize';
 import db from '.';
 
-export default class User extends Model<InferAttributes<User>, InferAttributes<User>> {
-  declare id: number;
+export default class User extends
+  Model<InferAttributes<User>, InferAttributes<User>> {
+  public id!: number;
 
-  declare username: string;
+  public username!: string;
 
-  declare role: string;
+  public role!: string;
 
-  declare email: string;
+  public email!: string;
 
-  declare password: string;
+  public password!: string;
 }
 
 User.init({

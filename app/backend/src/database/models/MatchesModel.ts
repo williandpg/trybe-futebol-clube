@@ -8,17 +8,17 @@ import db from '.';
 
 export default class Matches extends
   Model<InferAttributes<Matches>, InferCreationAttributes<Matches>> {
-  declare id: number;
+  public id!: number;
 
-  declare homeTeamId: string;
+  public homeTeamId!: string;
 
-  declare homeTeamGoals: number;
+  public homeTeamGoals!: number;
 
-  declare awayTeamId: string;
+  public awayTeamId!: string;
 
-  declare awayTeamGoals: number;
+  public awayTeamGoals!: number;
 
-  declare inProgress: boolean;
+  public inProgress!: boolean;
 }
 
 Matches.init({

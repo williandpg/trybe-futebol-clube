@@ -6,10 +6,11 @@ import {
 } from 'sequelize';
 import db from '.';
 
-export default class Team extends Model<InferAttributes<Team>, InferCreationAttributes<Team>> {
-  declare id: number;
+export default class Team extends
+  Model<InferAttributes<Team>, InferCreationAttributes<Team>> {
+  public id!: number;
 
-  declare teamName: string;
+  public teamName!: string;
 }
 
 Team.init({
