@@ -1,17 +1,17 @@
-// import { ServiceResponse } from '../Interfaces/serviceResponse';
-// import ITeams from '../Interfaces/ITeams';
-// import TeamsModel from '../models/teamsModel';
+import { ModelStatic } from 'sequelize';
+import { ServiceResponse } from '../Interfaces/serviceResponse';
+import ITeams from '../Interfaces/ITeams';
+import TeamsModel from '../database/models/TeamsModel';
 
-// export default class TeamsService {
-//   constructor(private teamsModel: TeamsModel = new TeamsModel()) {}
+class TeamsService {
+  constructor(
+    private teamsModel: ModelStatic<TeamsModel>,
+  ) { }
 
-//   public async getAllTeams(): Promise<ServiceResponse<ITeams[]>> {
-//     const teams = await this.teamsModel.findAll();
-//     return { data: teams, status: 'SUCCESS' };
-//   }
+  public async getAllTeams(): Promise<ServiceResponse<ITeams[]>> {
+    const newTeams = await this.teamsModel.findAll();
+    return { status: 'SUCCESS', data: newTeams };
+  }
+}
 
-//   public async getTeamById(id: number): Promise<ServiceResponse<ITeams>> {
-//     const team = await this.teamsModel.findById(id);
-//     return { data: team, status: 'SUCCESS' };
-//   }
-// }
+export default TeamsService;
