@@ -21,4 +21,4 @@ export default {
     down: async (queryInterface: QueryInterface): Promise<void> => {
         return queryInterface.dropTable('teams');
     },
-};
+}
