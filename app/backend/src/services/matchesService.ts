@@ -46,6 +46,17 @@ class MatchesService {
     const matchesFilter = matchesInProgress.filter((match) => match.inProgress === inProgress);
     return { status: 'SUCCESS', data: matchesFilter };
   }
+
+  public async updateMatch(id: string, homeTeamGoals: number, awayTeamGoals: number)
+    : Promise<ServiceResponse<{ message: string }>> {
+    await this.model.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return { status: 'SUCCESS', data: { message: 'Match updated!' } };
+  }
+
+  public async updateFinished(id:string): Promise<ServiceResponse<{ message: string }>> {
+    await this.model.update({ inProgress: false }, { where: { id } });
+    return { status: 'SUCCESS', data: { message: 'Finished' } };
+  }
 }
 
 export default MatchesService;
