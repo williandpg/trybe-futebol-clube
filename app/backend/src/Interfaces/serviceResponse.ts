@@ -13,3 +13,5 @@ export type ServiceResponseSuccess<T> = {
 };
 
 export type ServiceResponse<T> = ServiceResponseError | ServiceResponseSuccess<T>;
+
+export type Role = { role: string };

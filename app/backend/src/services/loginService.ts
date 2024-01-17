@@ -1,9 +1,9 @@
 import * as bcrypt from 'bcryptjs';
-import { ServiceResponse } from '../Interfaces/serviceResponse';
+import { ServiceResponse, Role } from '../Interfaces/serviceResponse';
 import { IToken } from '../Interfaces/IToken';
 import { ILogin } from '../Interfaces/ILogin';
 import UserModel from '../database/models/UserModel';
-import jwtUtil from '../utils/jwt';
+import jwt from '../utils/jwt';
 
 class LoginService {
   constructor(
@@ -15,16 +15,30 @@ class LoginService {
       return { status: 'INVALID_DATA',
         data: { message: 'All fields must be filled' } };
     }
-
-    const findUser = await this.userModel.findOne({ where: { email: login.email } });
-
-    if (!findUser || !bcrypt.compareSync(login.password, findUser.password)) {
-      return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
+    try {
+      const findUser = await this.userModel.findOne({ where: { email: login.email } });
+      if (!findUser || !bcrypt.compareSync(login.password, findUser.password)) {
+        return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
+      }
+      const { email, id } = findUser;
+      const token = jwt.sign({ email, id });
+      return { status: 'SUCCESS', data: { token } };
+    } catch (error) {
+      return { status: 'CONFLICT', data: { message: 'Erro' } };
     }
+  }
 
-    const { email, password } = findUser;
-    const token = jwtUtil.sign({ email, password });
-    return { status: 'SUCCESS', data: { token } };
+  public async roleUser(email: string): Promise<ServiceResponse<Role>> {
+    try {
+      const findUser = await this.userModel.findOne({ where: { email } });
+      if (!findUser) {
+        return { status: 'NOT_FOUND', data: { message: 'User not found' } };
+      }
+      const { role } = findUser.dataValues;
+      return { status: 'SUCCESS', data: { role } };
+    } catch (error) {
+      return { status: 'CONFLICT', data: { message: 'Erro' } };
+    }
   }
 }
 
