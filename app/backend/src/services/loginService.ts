@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcryptjs';
-import { ServiceResponse, Role } from '../Interfaces/serviceResponse';
+import { ServiceResponse, ServiceResponseRole } from '../Interfaces/serviceResponse';
 import { IToken } from '../Interfaces/IToken';
 import { ILogin } from '../Interfaces/ILogin';
 import UserModel from '../database/models/UserModel';
@@ -10,7 +10,7 @@ class LoginService {
     private userModel = UserModel,
   ) { }
 
-  public async Login(login: ILogin): Promise<ServiceResponse<IToken>> {
+  public async userLogin(login: ILogin): Promise<ServiceResponse<IToken>> {
     if (!login.email || !login.password) {
       return { status: 'INVALID_DATA',
         data: { message: 'All fields must be filled' } };
@@ -28,7 +28,7 @@ class LoginService {
     }
   }
 
-  public async roleUser(email: string): Promise<ServiceResponse<Role>> {
+  public async userRole(email: string): Promise<ServiceResponse<ServiceResponseRole>> {
     try {
       const findUser = await this.userModel.findOne({ where: { email } });
       if (!findUser) {

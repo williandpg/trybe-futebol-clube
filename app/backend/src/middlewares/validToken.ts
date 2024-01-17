@@ -9,12 +9,13 @@ const validToken = async (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const token = authorization.split(' ')[1];
-    const data = jwt.verify(token);
+    const tokenAuth = authorization.split(' ')[1];
+    const data = jwt.verify(tokenAuth);
     req.body.user = data;
     next();
   } catch (error) {
     return res.status(401).json({ message: 'Token must be a valid token' });
   }
 };
+
 export default validToken;

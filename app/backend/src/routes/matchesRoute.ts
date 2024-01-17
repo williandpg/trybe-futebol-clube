@@ -1,4 +1,4 @@
-import { Request, Router, Response } from 'express';
+import { Router, Request, Response } from 'express';
 import MatchesController from '../controllers/matchesController';
 
 const matchesController = new MatchesController();

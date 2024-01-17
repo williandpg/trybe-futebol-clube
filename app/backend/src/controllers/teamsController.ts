@@ -4,17 +4,17 @@ import mapHTTPstatus from '../utils/mapHTTPstatus';
 
 class teamsController {
   constructor(
-    private teamsService: TeamsServices,
+    private service: TeamsServices,
   ) {}
 
   public async getAllTeams(req: Request, res: Response) {
-    const { data, status } = await this.teamsService.getAllTeams();
-    res.status(mapHTTPstatus(status)).json(data);
+    const { data, status } = await this.service.getAllTeams();
+    return res.status(mapHTTPstatus(status)).json(data);
   }
 
   public async getTeamById(req: Request, res: Response) {
     const { id } = req.params;
-    const response = await this.teamsService.getTeamById(Number(id));
+    const response = await this.service.getTeamById(Number(id));
     return res.status(mapHTTPstatus(response.status)).json(response.data);
   }
 }

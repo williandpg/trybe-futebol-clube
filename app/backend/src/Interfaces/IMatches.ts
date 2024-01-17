@@ -9,11 +9,13 @@ export default interface IMatches {
   inProgress: boolean,
 }
 
+type TeamName = string | undefined;
+
 export interface IMatchesCRUD extends IMatches {
-  homeTeam: { teamName: string | undefined },
-  awayTeam: { teamName: string | undefined },
+  homeTeam: TeamName;
+  awayTeam: TeamName;
 }
 
-export interface IMatchesModel extends ICRUD<IMatches> {
+export interface IMatchesInterface extends ICRUD<IMatches> {
   findAll(): Promise<IMatchesCRUD[]>;
 }

@@ -4,18 +4,18 @@ import mapHTTPstatus from '../utils/mapHTTPstatus';
 
 class LoginController {
   constructor(
-    private loginService = new LoginService(),
+    private service = new LoginService(),
   ) { }
 
-  public async login(req: Request, res: Response) {
+  public async loginUser(req: Request, res: Response) {
     const { email, password } = req.body;
-    const response = await this.loginService.Login({ email, password });
+    const response = await this.service.userLogin({ email, password });
     return res.status(mapHTTPstatus(response.status)).json(response.data);
   }
 
-  public async role(req: Request, res: Response) {
+  public async roleUser(req: Request, res: Response) {
     const { email } = req.body.user;
-    const response = await this.loginService.roleUser(email);
+    const response = await this.service.userRole(email);
     return res.status(mapHTTPstatus(response.status)).json(response.data);
   }
 }

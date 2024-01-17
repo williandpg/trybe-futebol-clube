@@ -14,14 +14,14 @@ class TeamsService {
   }
 
   public async getTeamById(id: number): Promise<ServiceResponse<ITeams>> {
-    const team = await this.teamsModel.findOne({ where: { id } });
-    if (!team) {
+    const teamId = await this.teamsModel.findOne({ where: { id } });
+    if (!teamId) {
       return {
         status: 'NOT_FOUND',
         data: { message: 'Team not found' },
       };
     }
-    return { status: 'SUCCESS', data: team };
+    return { status: 'SUCCESS', data: teamId };
   }
 }
 
