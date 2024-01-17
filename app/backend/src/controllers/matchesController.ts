@@ -16,23 +16,6 @@ class MatchesController {
     const response = await this.service.findAll();
     return res.status(mapHTTPstatus(response.status)).json(response.data);
   }
-
-  public async matchUpdate(req: Request, res: Response) {
-    const { id } = req.params;
-    const { homeTeamGoals, awayTeamGoals } = req.body;
-    const response = await this.service.updateMatch(
-      String(id),
-      homeTeamGoals,
-      awayTeamGoals,
-    );
-    return res.status(mapHTTPstatus(response.status)).json(response.data);
-  }
-
-  public async finishedUpdate(req: Request, res: Response) {
-    const { id } = req.params;
-    const response = await this.service.updateFinished(String(id));
-    return res.status(mapHTTPstatus(response.status)).json(response.data);
-  }
 }
 
 export default MatchesController;
